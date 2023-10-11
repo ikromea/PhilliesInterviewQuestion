@@ -14,7 +14,9 @@ Tip: As is often the case, the data sometimes contains corrupted or malformed va
 
 Used Resources:
 -Flask
+
 -requests,bs4 libraries
+
 -Bulma
 
 
