@@ -1,0 +1,53 @@
+{% extends './base.html' %}
+{% block content %}
+
+<section class="section has-text-centered">
+    <h1 class="title">The current qualifying offer is {{averageSalary}}</h1>
+  </section>
+  <section>
+    <section class="section has-text-centered">
+    <h1 class="title">Player Comparison</h1>
+    <h2>Would add comparison feature between player and sacrificed draft pick</h2>
+
+</section>
+  <div class = "columns"> 
+    <div class = "column">
+        <h1 class="title">MLB Players with Top 125 Salaries in {{players[0]["player-year"]}}</h1>
+        <table class="table is-fullwidth is-bordered is-striped">
+            <thead>
+                <tr>
+                    <th>Player Name</th>
+                    <th>Salary</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for player in players %}
+                    <tr>
+                        <td>{{ player['player-name'] }}</td>
+                        <td>{{ player['format-player-salary'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class = "column">
+        <div class="box has-background-danger">
+            <h1 class="title is-5">Please note these players do not have proper data to be included</h1>
+        <table class="table is-fullwidth is-bordered is-striped">
+            <thead>
+                <tr>
+                    <th>Player Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for player in playersNoData %}
+                    <tr>
+                        <td>{{ player['player-name'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    </div>
+  </div>
+{% endblock %}

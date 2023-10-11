@@ -1,0 +1,341 @@
+{% extends './base.html' %}
+{% block content %}
+<!-- This code makes the switch look good provided by chatGPT -->
+<style>
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+    .slider {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        border-radius: 34px;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        border-radius: 50%;
+        transition: .4s;
+    }
+
+    input:checked + .slider {
+        background-color: #2196F3;
+    }
+
+    input:checked + .slider:before {
+        transform: translateX(26px);
+    }
+</style>
+
+<section class="section has-text-centered">
+    <h1 class="title">The current qualifying offer is {{averageSalary}}</h1>
+  </section>
+  <section>
+    <section class="section has-text-centered">
+    <h1 class="title">Player Comparison</h1>
+    <h2>Compare a player eligible for a qualifying offer and another player</h2>
+
+</section>
+<div class="container">
+    <p> positional player      
+    <label class="switch">
+        <input type="checkbox" id="toggleElement">
+        <span class="slider"></span>
+    </label>
+    pitcher </p>
+</div>
+    <form action="{{ url_for('compare') }}"  method="POST">
+        <div class="columns">
+            <div id="posForm1" class="column">
+                <h2 class="title is-5">Positional player with potential qualifying offer</h2>
+                <div class="field">
+                    <label class="label">Player Name</label>
+                    <div class="control">
+                        <input name="posPlayerName1" class="input" type="text" placeholder="Player Name">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Salary</label>
+                    <div class="control">
+                        <input name="posPlayerSalary1" class="input" type="text" placeholder={{averageSalary}} value={{averageSalary}}>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Position (POS)</label>
+                    <div class="control">
+                        <input name="posPlayerPos1" class="input" type="text" placeholder="Position">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">AVG</label>
+                    <div class="control">
+                        <input name="posPlayerAvg1" class="input" type="text" placeholder="AVG">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">OBP</label>
+                    <div class="control">
+                        <input name="posPlayerOBP1" class="input" type="text" placeholder="OBP">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">SLG</label>
+                    <div class="control">
+                        <input name="posPlayerSLG1" class="input" type="text" placeholder="SLG">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">OPS</label>
+                    <div class="control">
+                        <input name="posPlayerOPS1" class="input" type="text" placeholder="OPS">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Fielding Percentage</label>
+                    <div class="control">
+                        <input name="posPlayerFP1" class="input" type="text" placeholder="Fielding Percentage">
+                    </div>
+                </div>
+            </div>
+            <div id="posForm2" class="column">
+                <h2 class="title is-5">Alternative positional player</h2>
+                <div class="field">
+                    <label class="label">Player Name</label>
+                    <div class="control">
+                        <input name="posPlayerName2" class="input" type="text" placeholder="Player Name">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Salary</label>
+                    <div class="control">
+                        <input name="posPlayerSalary2" class="input" type="text" placeholder="Salary" value="$">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Position (POS)</label>
+                    <div class="control">
+                        <input name="posPlayerPos2" class="input" type="text" placeholder="Position">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">AVG</label>
+                    <div class="control">
+                        <input name="posPlayerAvg2" class="input" type="text" placeholder="AVG">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">OBP</label>
+                    <div class="control">
+                        <input name="posPlayerOBP2" class="input" type="text" placeholder="OBP">
+                    </div>
+                </div>
+                <div name="posPlayerSLG2"class="field">
+                    <label class="label">SLG</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="SLG">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">OPS</label>
+                    <div class="control">
+                        <input name="posPlayerOPS2" class="input" type="text" placeholder="OPS">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Fielding Percentage</label>
+                    <div class="control">
+                        <input name="posPlayerFP2" class="input" type="text" placeholder="Fielding Percentage">
+                    </div>
+                </div>
+                <div class="field is-grouped">
+                    <div class="control">
+                        <button class="button is-link">Submit</button>
+                    </div>
+                </div>
+            </div>
+            <div id ="pitForm1" class="column is-hidden">
+                <h2 class="title is-5">Pitcher with potential qualifying offer</h2>
+                <div  class="field">
+                    <label class="label">Player Name</label>
+                    <div class="control">
+                        <input name="pitName1" class="input" type="text" placeholder="Player Name">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Salary</label>
+                    <div class="control">
+                        <input name="pitSalary1" class="input" type="text" placeholder={{averageSalary}} value={{averageSalary}}>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">%S</label>
+                    <div class="control">
+                        <input name="pitPS1" class="input" type="text" placeholder="%S">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">P/IP</label>
+                    <div class="control">
+                        <input name="pitPIP1" class="input" type="text" placeholder="P/IP">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">P/PA</label>
+                    <div class="control">
+                        <input name="pitPPA1"class="input" type="text" placeholder="P/PA">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">AVG</label>
+                    <div class="control">
+                        <input name="pitAvg1" class="input" type="text" placeholder="AVG">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">WHIP</label>
+                    <div class="control">
+                        <input name="pitWHIP1" class="input" type="text" placeholder="WHIP">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Fielding Percentage</label>
+                    <div class="control">
+                        <input name="pitFP1" class="input" type="text" placeholder="Fielding Percentage">
+                    </div>
+                </div>
+            </div>
+            <div id="pitForm2" class="column is-hidden">
+                <h2 class="title is-5">Alternative pitcher</h2>
+                <div class="field">
+                    <label class="label">Player Name</label>
+                    <div class="control">
+                        <input name="pitName2" class="input" type="text" placeholder="Player Name">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Salary</label>
+                    <div class="control">
+                        <input name="pitSalary2" class="input" type="text" placeholder="Salary" value="$">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">%S</label>
+                    <div class="control">
+                        <input name="pitPS2"class="input" type="text" placeholder="%S">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">P/IP</label>
+                    <div class="control">
+                        <input name="pitPIP2" class="input" type="text" placeholder="P/IP">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">P/PA</label>
+                    <div class="control">
+                        <input name="pitPPA2" class="input" type="text" placeholder="P/PA">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">AVG</label>
+                    <div class="control">
+                        <input name="pitAvg2" class="input" type="text" placeholder="AVG">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">WHIP</label>
+                    <div class="control">
+                        <input name="pitWHIP2" class="input" type="text" placeholder="WHIP">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Fielding Percentage</label>
+                    <div class="control">
+                        <input name="pitFP2"class="input" type="text" placeholder="Fielding Percentage">
+                    </div>
+                </div>
+                <div class="field is-grouped">
+                    <div class="control">
+                        <button class="button is-link">Submit</button>
+                    </div>
+                </div>
+            </div>       
+        </div>
+    </form>
+    <script>
+        document.getElementById('toggleElement').addEventListener('change', function() {
+            var posForm1 = document.getElementById('posForm1');
+            var posForm2 = document.getElementById('posForm2');
+            var pitForm1 = document.getElementById('pitForm1');
+            var pitForm2 = document.getElementById('pitForm2');
+
+            if (this.checked) {
+                posForm1.classList.add('is-hidden');
+                posForm2.classList.add('is-hidden');
+                pitForm1.classList.remove('is-hidden');
+                pitForm2.classList.remove('is-hidden');
+            } else {
+                posForm1.classList.remove('is-hidden');
+                posForm2.classList.remove('is-hidden');
+                pitForm1.classList.add('is-hidden');
+                pitForm2.classList.add('is-hidden');
+            }
+        });
+    </script>
+</section>
+
+  <div class = "columns"> 
+    <div class = "column">
+        <h1 class="title">MLB Players with Top 125 Salaries in {{players[0]["player-year"]}}</h1>
+        <table class="table is-fullwidth is-bordered is-striped">
+            <thead>
+                <tr>
+                    <th>Player Name</th>
+                    <th>Salary</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for player in players %}
+                    <tr>
+                        <td>{{ player['player-name'] }}</td>
+                        <td>{{ player['format-player-salary'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class = "column">
+        <div class="box has-background-danger">
+            <h1 class="title is-5">Please note these players do not have proper data to be included</h1>
+        <table class="table is-fullwidth is-bordered is-striped">
+            <thead>
+                <tr>
+                    <th>Player Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for player in playersNoData %}
+                    <tr>
+                        <td>{{ player['player-name'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    </div>
+  </div>
+{% endblock %}

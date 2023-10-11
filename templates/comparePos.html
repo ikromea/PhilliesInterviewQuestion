@@ -1,0 +1,49 @@
+{% extends './base.html' %}
+{% block content %}
+<table class="table is-fullwidth is-bordered is-striped">
+    <thead>
+        <tr>
+            <th></th>
+            <th>{{formData["posPlayerName1"]}}</th>
+            <th>{{formData["posPlayerName2"]}}</th>
+        </tr>
+    </thead>
+    <tbody>
+            <tr>
+                <td>Salary</td>
+                <td>{{ formData['posPlayerSalary1'] }}</td>
+                <td>{{ formData['posPlayerSalary2'] }}</td>
+            </tr>
+            <tr>
+                <td>Position</td>
+                <td>{{ formData['posPlayerPos1'] }}</td>
+                <td>{{ formData['posPlayerPos2'] }}</td>
+            </tr>
+            <tr>
+                <td>AVG</td>
+                <td>{{ formData['posPlayerAvg1'] }}</td>
+                <td>{{ formData['posPlayerAvg2'] }}</td>
+            </tr>
+            <tr>
+                <td>OBP</td>
+                <td>{{ formData['posPlayerOBP1'] }}</td>
+                <td>{{ formData['posPlayerOBP2'] }}</td>
+            </tr>
+            <tr>
+                <td>SLG</td>
+                <td>{{ formData['posPlayerSLG1'] }}</td>
+                <td>{{ formData['posPlayerSLG2'] }}</td>
+            </tr>
+            <tr>
+                <td>OPS</td>
+                <td>{{ formData['posPlayerOPS1'] }}</td>
+                <td>{{ formData['posPlayerOPS2'] }}</td>
+            </tr>
+            <tr>
+                <td>Fielding Percent</td>
+                <td>{{ formData['posPlayerFP1'] }}</td>
+                <td>{{ formData['posPlayerFP2'] }}</td>
+            </tr>
+    </tbody>
+</table>
+{% endblock %}

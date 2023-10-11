@@ -1,0 +1,49 @@
+{% extends './base.html' %}
+{% block content %}
+<table class="table is-fullwidth is-bordered is-striped">
+    <thead>
+        <tr>
+            <th></th>
+            <th>{{formData["pitName1"]}}</th>
+            <th>{{formData["pitName2"]}}</th>
+        </tr>
+    </thead>
+    <tbody>
+            <tr>
+                <td>Salary</td>
+                <td>{{ formData['pitSalary1'] }}</td>
+                <td>{{ formData['pitSalary2'] }}</td>
+            </tr>
+            <tr>
+                <td>%S</td>
+                <td>{{ formData['pitPS1'] }}</td>
+                <td>{{ formData['pitPS2'] }}</td>
+            </tr>
+            <tr>
+                <td>P/IP</td>
+                <td>{{ formData['pitPIP1'] }}</td>
+                <td>{{ formData['pitPIP2'] }}</td>
+            </tr>
+            <tr>
+                <td>P/PA</td>
+                <td>{{ formData['pitPPA1'] }}</td>
+                <td>{{ formData['pitPPA2'] }}</td>
+            </tr>
+            <tr>
+                <td>AVG</td>
+                <td>{{ formData['pitAvg1'] }}</td>
+                <td>{{ formData['pitAvg2'] }}</td>
+            </tr>
+            <tr>
+                <td>WHIP</td>
+                <td>{{ formData['pitWHIP1'] }}</td>
+                <td>{{ formData['pitWHIP2'] }}</td>
+            </tr>
+            <tr>
+                <td>Fielding Percent</td>
+                <td>{{ formData['pitFP1'] }}</td>
+                <td>{{ formData['pitFP2'] }}</td>
+            </tr>
+    </tbody>
+</table>
+{% endblock %}
